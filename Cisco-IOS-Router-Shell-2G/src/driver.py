@@ -20,7 +20,7 @@ from cloudshell.devices.runners.state_runner import StateRunner as StateRunner
 from cloudshell.networking.networking_resource_driver_interface import NetworkingResourceDriverInterface
 from cloudshell.shell.core.driver_utils import GlobalLock
 from cloudshell.shell.core.resource_driver_interface import ResourceDriverInterface
-
+from data_model import *
 
 class CiscoIOSShellDriver(ResourceDriverInterface, NetworkingResourceDriverInterface, GlobalLock):
     SUPPORTED_OS = [r"CAT[ -]?OS", r"IOS[ -]?X?[E]?"]
@@ -70,15 +70,15 @@ class CiscoIOSShellDriver(ResourceDriverInterface, NetworkingResourceDriverInter
         # response = autoload_operations.discover()
         # logger.info('Autoload completed')
         # return response
-        template = 'Cisco IOS Router Shell 2G'
-        resource = template.create_from_context(context)
+        template = 'Cisco IOS Router 2G'
+        resource = CiscoIOSRouter2G.create_from_context(context)
         resource.vendor = template
         resource.model = 'Cisco-IOS-Router-Shell-2G'
         resource.attributes[template + '.ServerName'] = resource.name
         num_of_ports = int(resource.attributes[template + '.NumberOfPorts'])
         for port_number_raw in range(num_of_ports):
             port_number = port_number_raw + 1
-            port1 = ResourcePort('Port {}'.format(str(port_number)))
+            port1 = GenericPort('Port {}'.format(str(port_number)))
             port1.address = '{}'.format(str(port_number))
             resource.add_sub_resource('{}'.format(str(port_number)), port1)
 
