@@ -54,34 +54,23 @@ class CiscoIOSShellDriver(ResourceDriverInterface, NetworkingResourceDriverInter
         :rtype: str
         """
 
-        # logger = get_logger_with_thread_id(context)
-        # api = get_api(context)
-        #
-        # resource_config = create_networking_resource_from_context(shell_name=self.SHELL_NAME,
-        #                                                           supported_os=self.SUPPORTED_OS,
-        #                                                           context=context)
-        # cli_handler = CliHandler(self._cli, resource_config, logger, api)
-        # snmp_handler = SNMPHandler(resource_config, logger, api, cli_handler)
-        #
-        # autoload_operations = AutoloadRunner(logger=logger,
-        #                                      resource_config=resource_config,
-        #                                      snmp_handler=snmp_handler)
-        # logger.info('Autoload started')
-        # response = autoload_operations.discover()
-        # logger.info('Autoload completed')
-        # return response
         template = 'Cisco IOS Router 2G'
         resource = CiscoIOSRouter2G.create_from_context(context)
         resource.vendor = template
         resource.model = 'Cisco-IOS-Router-Shell-2G'
         resource.attributes[template + '.ServerName'] = resource.name
         num_of_ports = int(resource.attributes[template + '.NumberOfPorts'])
+        Chassis1 = GenericChassis('Chassis1')
+        Chassis1.address = '1'
+        resource.add_sub_resource('1', Chassis1)
+        Module1 = GenericModule('Module1')
+        Module1.address = '1'
+        Chassis1.add_sub_resource('1', Module1)
         for port_number_raw in range(num_of_ports):
             port_number = port_number_raw + 1
             port1 = GenericPort('Port {}'.format(str(port_number)))
             port1.address = '{}'.format(str(port_number))
-            resource.add_sub_resource('{}'.format(str(port_number)), port1)
-
+            Module1.add_sub_resource('{}'.format(str(port_number)), port1)
         return resource.create_autoload_details()
 
 
