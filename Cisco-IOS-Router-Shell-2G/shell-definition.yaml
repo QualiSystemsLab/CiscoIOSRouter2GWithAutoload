@@ -2,8 +2,8 @@ tosca_definitions_version: tosca_simple_yaml_1_0
 
 metadata:
   template_name: Cisco IOS Router Shell 2G
-  template_author: steven
-  template_version: 1.0.1
+  template_author: Quali
+  template_version: 1.0.0
   template_icon: shell-icon.png
 
   template_based_on: 1.0.0
