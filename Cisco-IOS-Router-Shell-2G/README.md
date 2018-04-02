@@ -11,6 +11,6 @@
 # Cisco IOS Router Shell Gen 2 - modified to create a mock resource structure
 *This is not an official Quali shell. It was created for simulation purposes only and should not be used in production environments.*
 
-This shell is based on the Cisco IOS Router Shell (2G). It's "get_inventory" function has been modified to create a mock resource structure of 16 ports. Additional modifications include **ServerName** and **NumberOfPorts** attributes, to be used by the mock autoload process.
+This shell is based on the Cisco IOS Router Shell (2G). It's *get_inventory* function has been modified to create a mock resource structure of 16 ports. Additional modifications include **ServerName** and **NumberOfPorts** attributes, to be used by the mock autoload process.
 
 **Note:** The number of ports can be changed by editing the shell resource's **NUMBEROFPORTS** attribute.
